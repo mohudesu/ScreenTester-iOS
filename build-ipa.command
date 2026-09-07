@@ -20,7 +20,7 @@ xcodebuild -project ScreenTester.xcodeproj -scheme ScreenTester -configuration R
   CODE_SIGNING_ALLOWED=NO CODE_SIGNING_REQUIRED=NO build 2>&1 | tee "output/build-$stamp.log"
 app="$build_dir/Build/Products/Release-iphoneos/ScreenTester.app"
 test -f "$app/ScreenTester"
-xcrun lipo -verify_arch arm64 "$app/ScreenTester"
+xcrun lipo "$app/ScreenTester" -verify_arch arm64
 plutil -lint "$app/Info.plist"
 mkdir -p "$stage_dir/Payload"
 ditto "$app" "$stage_dir/Payload/ScreenTester.app"
