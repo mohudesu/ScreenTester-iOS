@@ -1,0 +1,15 @@
+{
+  "checked_at": "2026-09-07T10:27:11.445088+00:00",
+  "project_object_references": "PASS",
+  "source_paths": "PASS",
+  "info_plist_xml": "PASS",
+  "shared_scheme_xml_and_target": "PASS",
+  "asset_catalog_json": "PASS",
+  "bash_syntax": "PASS",
+  "github_workflow_yaml_and_build_path": "PASS",
+  "github_actions_execution": "NOT RUN: awaiting user repository",
+  "swift_compilation": "NOT RUN: macOS/Xcode unavailable",
+  "simulator_execution": "NOT RUN",
+  "iphone_device_validation": "NOT RUN",
+  "ipa_generated": false
+}
