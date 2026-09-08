@@ -1,0 +1,58 @@
+name: Publish unsigned IPA release
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/release-ios.yml'
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+    steps:
+      - name: Download verified IPA from successful build
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh run download 34114900583 --name ScreenTester-unsigned-IPA --dir package
+          cd package
+          mv ScreenTester-unsigned-20260907-110650-1297.ipa ScreenTester-iPhone17-unsigned.ipa
+          printf '%s\n' '32ad38e02c86de80af18731c61501e6b71b82cf93a523a93b4b07e9ba122268f  ScreenTester-iPhone17-unsigned.ipa' > ScreenTester-iPhone17-unsigned.ipa.sha256
+          sha256sum -c ScreenTester-iPhone17-unsigned.ipa.sha256
+          unzip -t ScreenTester-iPhone17-unsigned.ipa
+
+      - name: Publish v0.1.0
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > release-notes.md <<'NOTES'
+          原生 Swift/UIKit 屏幕测试工具，适配目标为 iPhone 17，最低 iOS 17.0。
+
+          **下载 ScreenTester-iPhone17-unsigned.ipa，自行签名后安装。**
+
+          包含黑边描边、像素分区、手动圆角校准、纯色/灰阶/白平衡/彩条、触控网格、多指触控及触控事件频率统计。HDR 页面仅提供系统 EDR 能力信息。
+
+          已通过 Xcode 26.6 的 ARM64 设备编译、IPA 完整性与 SHA-256 校验；尚未在 iPhone 实机验证。圆角需要手动校准，毫米值为理论换算，触控事件频率不等于硬件采样率。这是初版移植，部分 Android 专业测试图和系统专属功能未移植。
+
+          上游项目：https://github.com/byHydrogen/ScreenTester
+          构建记录：https://github.com/mohudesu/ScreenTester-iOS/actions/runs/34114900583
+          NOTES
+          if gh release view v0.1.0 >/dev/null 2>&1; then
+            echo 'Release v0.1.0 already exists; leaving it unchanged.'
+            exit 0
+          fi
+          gh release create v0.1.0 \
+            --target c85b299e84426aeb49d5847f361bb381f045550a \
+            --title 'ScreenTester iOS v0.1.0（未签名）' \
+            --notes-file release-notes.md \
+            package/ScreenTester-iPhone17-unsigned.ipa \
+            package/ScreenTester-iPhone17-unsigned.ipa.sha256
