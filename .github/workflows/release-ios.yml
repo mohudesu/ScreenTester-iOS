@@ -33,7 +33,7 @@ jobs:
           unzip -t ScreenTester-iPhone17-unsigned.ipa
           sha256sum ScreenTester-iPhone17-unsigned.ipa > ScreenTester-iPhone17-unsigned.ipa.sha256
 
-      - name: Update release description and publish v0.1.1
+      - name: Update release description and publish v0.2.0
         shell: bash
         run: |
           set -euo pipefail
@@ -42,17 +42,18 @@ jobs:
 
           **下载 ScreenTester-iPhone17-unsigned.ipa，自行签名后安装。**
 
+          新拟态首页与设置页：柔和双向阴影、分组卡片、浅色/深色主题、动态字体及按压反馈。测试画面保持纯色与精确线条。
+
           提供黑边描边、像素分区、手动圆角校准、纯色、灰阶、白平衡、彩条、触控网格、多指触控和触控事件频率统计。HDR 页面仅提供系统 EDR 能力信息。
 
-          已通过 ARM64 设备编译和 IPA 完整性校验；尚未在 iPhone 实机验证。圆角需手动校准，毫米值是理论换算，触控事件频率不等于硬件采样率。
+          已通过模拟器的首页跳转、设置保存、全屏测试退出检查，以及 ARM64 设备编译和 IPA 完整性校验；尚未在 iPhone 实机验证。圆角需手动校准，毫米值是理论换算，触控事件频率不等于硬件采样率。
           NOTES
-          gh release edit v0.1.0 --notes-file release-notes.md
-          if gh release view v0.1.1 >/dev/null 2>&1; then
-            echo 'v0.1.1 already exists; keeping published files unchanged.'
+          if gh release view v0.2.0 >/dev/null 2>&1; then
+            echo 'v0.2.0 already exists; keeping published files unchanged.'
             exit 0
           fi
-          gh release create v0.1.1 --target "$SOURCE_SHA" \
-            --title 'ScreenTester iOS v0.1.1（未签名）' \
+          gh release create v0.2.0 --target "$SOURCE_SHA" \
+            --title 'ScreenTester iOS v0.2.0 · 新拟态界面（未签名）' \
             --notes-file release-notes.md \
             package/ScreenTester-iPhone17-unsigned.ipa \
             package/ScreenTester-iPhone17-unsigned.ipa.sha256

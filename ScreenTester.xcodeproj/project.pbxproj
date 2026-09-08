@@ -5,22 +5,28 @@
 	};
 	"objectVersion" = 56;
 	"objects" = {
-		"00000000000000000000000A" = {
+		"000000000000000000000064" = {
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "sourcecode.swift";
 			"path" = "App.swift";
 			"sourceTree" = "<group>";
 		};
-		"00000000000000000000000B" = {
+		"000000000000000000000065" = {
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "sourcecode.swift";
 			"path" = "TestController.swift";
 			"sourceTree" = "<group>";
 		};
-		"00000000000000000000000C" = {
+		"000000000000000000000066" = {
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "sourcecode.swift";
 			"path" = "TestCanvas.swift";
+			"sourceTree" = "<group>";
+		};
+		"000000000000000000000067" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "Interface.swift";
 			"sourceTree" = "<group>";
 		};
 		"00000000000000000000000D" = {
@@ -42,17 +48,21 @@
 			"path" = "ScreenTester.app";
 			"sourceTree" = "BUILT_PRODUCTS_DIR";
 		};
-		"000000000000000000000014" = {
+		"0000000000000000000000C8" = {
 			"isa" = "PBXBuildFile";
-			"fileRef" = "00000000000000000000000A";
+			"fileRef" = "000000000000000000000064";
 		};
-		"000000000000000000000015" = {
+		"0000000000000000000000C9" = {
 			"isa" = "PBXBuildFile";
-			"fileRef" = "00000000000000000000000B";
+			"fileRef" = "000000000000000000000065";
 		};
-		"000000000000000000000016" = {
+		"0000000000000000000000CA" = {
 			"isa" = "PBXBuildFile";
-			"fileRef" = "00000000000000000000000C";
+			"fileRef" = "000000000000000000000066";
+		};
+		"0000000000000000000000CB" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "000000000000000000000067";
 		};
 		"000000000000000000000018" = {
 			"isa" = "PBXBuildFile";
@@ -62,9 +72,10 @@
 			"isa" = "PBXSourcesBuildPhase";
 			"buildActionMask" = 2147483647;
 			"files" = (
-				"000000000000000000000014",
-				"000000000000000000000015",
-				"000000000000000000000016",
+				"0000000000000000000000C8",
+				"0000000000000000000000C9",
+				"0000000000000000000000CA",
+				"0000000000000000000000CB",
 			);
 			"runOnlyForDeploymentPostprocessing" = 0;
 		};
@@ -86,9 +97,10 @@
 		"000000000000000000000028" = {
 			"isa" = "PBXGroup";
 			"children" = (
-				"00000000000000000000000A",
-				"00000000000000000000000B",
-				"00000000000000000000000C",
+				"000000000000000000000064",
+				"000000000000000000000065",
+				"000000000000000000000066",
+				"000000000000000000000067",
 				"00000000000000000000000D",
 				"00000000000000000000000E",
 			);
@@ -99,6 +111,7 @@
 			"isa" = "PBXGroup";
 			"children" = (
 				"00000000000000000000000F",
+				"00000000000000000000012D",
 			);
 			"name" = "Products";
 			"sourceTree" = "<group>";
@@ -108,6 +121,7 @@
 			"children" = (
 				"000000000000000000000028",
 				"000000000000000000000029",
+				"00000000000000000000012E",
 			);
 			"sourceTree" = "<group>";
 		};
@@ -158,8 +172,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				"CURRENT_PROJECT_VERSION" = "2";
-				"MARKETING_VERSION" = "0.1.1";
+				"CURRENT_PROJECT_VERSION" = "3";
+				"MARKETING_VERSION" = "0.2.0";
 			};
 		};
 		"000000000000000000000035" = {
@@ -180,8 +194,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				"CURRENT_PROJECT_VERSION" = "2";
-				"MARKETING_VERSION" = "0.1.1";
+				"CURRENT_PROJECT_VERSION" = "3";
+				"MARKETING_VERSION" = "0.2.0";
 			};
 		};
 		"000000000000000000000036" = {
@@ -229,6 +243,10 @@
 						"CreatedOnToolsVersion" = "16.0";
 						"ProvisioningStyle" = "Automatic";
 					};
+					"000000000000000000000136" = {
+						"CreatedOnToolsVersion" = "16.0";
+						"TestTargetID" = "00000000000000000000003C";
+					};
 				};
 			};
 			"buildConfigurationList" = "000000000000000000000036";
@@ -246,7 +264,118 @@
 			"projectRoot" = "";
 			"targets" = (
 				"00000000000000000000003C",
+				"000000000000000000000136",
 			);
+		};
+		"00000000000000000000012C" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "InterfaceTests.swift";
+			"sourceTree" = "<group>";
+		};
+		"00000000000000000000012D" = {
+			"isa" = "PBXFileReference";
+			"explicitFileType" = "wrapper.cfbundle";
+			"includeInIndex" = 0;
+			"path" = "ScreenTesterUITests.xctest";
+			"sourceTree" = "BUILT_PRODUCTS_DIR";
+		};
+		"00000000000000000000012E" = {
+			"isa" = "PBXGroup";
+			"children" = (
+				"00000000000000000000012C",
+			);
+			"path" = "UITests";
+			"sourceTree" = "<group>";
+		};
+		"00000000000000000000012F" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "00000000000000000000012C";
+		};
+		"000000000000000000000130" = {
+			"isa" = "PBXSourcesBuildPhase";
+			"buildActionMask" = 2147483647;
+			"files" = (
+				"00000000000000000000012F",
+			);
+			"runOnlyForDeploymentPostprocessing" = 0;
+		};
+		"000000000000000000000131" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Debug";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "com.local.screentester.UITests";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TEST_TARGET_NAME" = "ScreenTester";
+				"SWIFT_VERSION" = "5.0";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+			};
+		};
+		"000000000000000000000132" = {
+			"isa" = "XCBuildConfiguration";
+			"name" = "Release";
+			"buildSettings" = {
+				"PRODUCT_NAME" = "$(TARGET_NAME)";
+				"PRODUCT_BUNDLE_IDENTIFIER" = "com.local.screentester.UITests";
+				"GENERATE_INFOPLIST_FILE" = "YES";
+				"CODE_SIGN_STYLE" = "Automatic";
+				"TARGETED_DEVICE_FAMILY" = "1";
+				"SUPPORTED_PLATFORMS" = "iphoneos iphonesimulator";
+				"TEST_TARGET_NAME" = "ScreenTester";
+				"SWIFT_VERSION" = "5.0";
+				"IPHONEOS_DEPLOYMENT_TARGET" = "17.0";
+				"LD_RUNPATH_SEARCH_PATHS" = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+			};
+		};
+		"000000000000000000000133" = {
+			"isa" = "XCConfigurationList";
+			"buildConfigurations" = (
+				"000000000000000000000131",
+				"000000000000000000000132",
+			);
+			"defaultConfigurationIsVisible" = 0;
+			"defaultConfigurationName" = "Debug";
+		};
+		"000000000000000000000134" = {
+			"isa" = "PBXContainerItemProxy";
+			"containerPortal" = "000000000000000000000001";
+			"proxyType" = 1;
+			"remoteGlobalIDString" = "00000000000000000000003C";
+			"remoteInfo" = "ScreenTester";
+		};
+		"000000000000000000000135" = {
+			"isa" = "PBXTargetDependency";
+			"target" = "00000000000000000000003C";
+			"targetProxy" = "000000000000000000000134";
+		};
+		"000000000000000000000136" = {
+			"isa" = "PBXNativeTarget";
+			"buildConfigurationList" = "000000000000000000000133";
+			"buildPhases" = (
+				"000000000000000000000130",
+			);
+			"buildRules" = (
+			);
+			"dependencies" = (
+				"000000000000000000000135",
+			);
+			"name" = "ScreenTesterUITests";
+			"productName" = "ScreenTesterUITests";
+			"productReference" = "00000000000000000000012D";
+			"productType" = "com.apple.product-type.bundle.ui-testing";
 		};
 	};
 	"rootObject" = "000000000000000000000001";

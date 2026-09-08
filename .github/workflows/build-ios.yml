@@ -8,6 +8,8 @@ on:
       - 'ScreenTester/**'
       - 'ScreenTester.xcodeproj/**'
       - 'build-ipa.command'
+      - 'test-ui.command'
+      - 'UITests/**'
       - '.github/workflows/build-ios.yml'
 
 permissions:
@@ -35,6 +37,10 @@ jobs:
           plutil -lint ScreenTester/Info.plist
           plutil -lint ScreenTester.xcodeproj/project.pbxproj
 
+      - name: Verify UI in iPhone simulator
+        shell: bash
+        run: bash test-ui.command
+
       - name: Build and package unsigned IPA
         shell: bash
         run: bash build-ipa.command
@@ -55,5 +61,14 @@ jobs:
         with:
           name: ScreenTester-build-logs
           path: output/*.log
+          if-no-files-found: ignore
+          retention-days: 7
+
+      - name: Save interface screenshots
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: ScreenTester-interface-previews
+          path: output/ui-screenshots/
           if-no-files-found: ignore
           retention-days: 7

@@ -26,7 +26,7 @@ mkdir -p "$stage_dir/Payload"
 ditto "$app" "$stage_dir/Payload/ScreenTester.app"
 ditto -c -k --keepParent "$stage_dir/Payload" "$PWD/output/$ipa_name"
 unzip -t "output/$ipa_name"
-shasum -a 256 "output/$ipa_name" > "output/$ipa_name.sha256"
+(cd output && shasum -a 256 "$ipa_name" > "$ipa_name.sha256")
 echo "Created: $PWD/output/$ipa_name"
 echo "UNSIGNED: sign this IPA yourself before installing."
 if [[ "${CI:-false}" != "true" ]]; then
