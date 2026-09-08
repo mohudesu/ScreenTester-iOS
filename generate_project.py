@@ -2,7 +2,6 @@
 from pathlib import Path
 import json
 import plistlib
-import shutil
 import struct
 import zlib
 
@@ -31,7 +30,7 @@ app_group = obj(40, isa='PBXGroup', children=files+[info, assets], path='ScreenT
 products = obj(41, isa='PBXGroup', children=[product], name='Products', sourceTree='<group>')
 main = obj(42, isa='PBXGroup', children=[app_group, products], sourceTree='<group>')
 project_settings = dict(CLANG_ENABLE_MODULES='YES', CLANG_ENABLE_OBJC_ARC='YES', SDKROOT='iphoneos', IPHONEOS_DEPLOYMENT_TARGET='17.0', SWIFT_VERSION='5.0')
-target_settings = dict(PRODUCT_NAME='$(TARGET_NAME)', PRODUCT_BUNDLE_IDENTIFIER='com.local.screentester', INFOPLIST_FILE='ScreenTester/Info.plist', GENERATE_INFOPLIST_FILE='NO', CODE_SIGN_STYLE='Automatic', TARGETED_DEVICE_FAMILY='1', SUPPORTED_PLATFORMS='iphoneos iphonesimulator', SUPPORTS_MACCATALYST='NO', SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD='NO', ASSETCATALOG_COMPILER_APPICON_NAME='AppIcon', LD_RUNPATH_SEARCH_PATHS=['$(inherited)', '@executable_path/Frameworks'], CURRENT_PROJECT_VERSION='1', MARKETING_VERSION='0.1.0')
+target_settings = dict(PRODUCT_NAME='$(TARGET_NAME)', PRODUCT_BUNDLE_IDENTIFIER='com.local.screentester', INFOPLIST_FILE='ScreenTester/Info.plist', GENERATE_INFOPLIST_FILE='NO', CODE_SIGN_STYLE='Automatic', TARGETED_DEVICE_FAMILY='1', SUPPORTED_PLATFORMS='iphoneos iphonesimulator', SUPPORTS_MACCATALYST='NO', SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD='NO', ASSETCATALOG_COMPILER_APPICON_NAME='AppIcon', LD_RUNPATH_SEARCH_PATHS=['$(inherited)', '@executable_path/Frameworks'], CURRENT_PROJECT_VERSION='2', MARKETING_VERSION='0.1.1')
 p_debug = obj(50, isa='XCBuildConfiguration', name='Debug', buildSettings={**project_settings, 'SWIFT_OPTIMIZATION_LEVEL': '-Onone', 'DEBUG_INFORMATION_FORMAT': 'dwarf', 'ENABLE_TESTABILITY': 'YES', 'SWIFT_ACTIVE_COMPILATION_CONDITIONS': 'DEBUG'})
 p_release = obj(51, isa='XCBuildConfiguration', name='Release', buildSettings={**project_settings, 'SWIFT_OPTIMIZATION_LEVEL': '-O', 'DEBUG_INFORMATION_FORMAT': 'dwarf-with-dsym', 'SWIFT_COMPILATION_MODE': 'wholemodule'})
 t_debug = obj(52, isa='XCBuildConfiguration', name='Debug', buildSettings=target_settings.copy())
@@ -89,7 +88,4 @@ for y in range(1024):
         pixels.extend(color)
 png = b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', 1024, 1024, 8, 2, 0, 0, 0)) + chunk(b'IDAT', zlib.compress(pixels, 9)) + chunk(b'IEND', b'')
 (asset_dir / 'AppIcon.png').write_bytes(png)
-upstream = ROOT.parent / 'ScreenTester' / 'README.md'
-if upstream.exists():
-    shutil.copyfile(upstream, ROOT / 'upstream-README.md')
 print('Generated Xcode project, Info.plist, scheme and icon; Xcode compilation still required.')

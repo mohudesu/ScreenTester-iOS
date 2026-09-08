@@ -62,7 +62,7 @@ final class HomeController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int { section == 0 ? TestKind.allCases.count : 1 }
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? { section == 0 ? "iPhone 屏幕检测" : "使用说明" }
     override func tableView(_ tableView: UITableView, titleForFooterInSection section: Int) -> String? {
-        section == 0 ? "测试全屏显示，长按 2 秒退出。请用肉眼观察屏幕，截图无法记录钢化膜遮挡或面板坏点。" : "基于 byHydrogen/ScreenTester 功能移植的非官方 iOS 版。灵动岛、屏幕物理圆角及系统手势区域不能由应用消除。"
+        section == 0 ? "测试全屏显示，长按 2 秒退出。请用肉眼观察屏幕，截图无法记录钢化膜遮挡或面板坏点。" : "ScreenTester iOS · mohudesu。灵动岛、屏幕物理圆角及系统手势区域不能由应用消除。"
     }
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)

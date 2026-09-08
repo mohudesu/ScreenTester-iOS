@@ -1,8 +1,10 @@
-# ScreenTester iOS 移植工程（待 Mac 编译）
+# ScreenTester iOS
+
+维护者：mohudesu。
 
 目标：iPhone 17 使用的未签名 IPA，由用户自行签名。Swift/UIKit 原生实现，最低 iOS 17.0，竖屏，无第三方依赖。
 
-**当前 ZIP 是源代码工程，不是 IPA。尚未在 Xcode 编译或 iPhone 实机验证。** 当前工作环境只有 Windows，最后编译步骤需要 Mac + Xcode，或使用已经配置好的 GitHub Actions 云端 macOS。
+**本项目已通过 GitHub 云端 Xcode 设备编译，生成未签名 IPA；尚未经过 iPhone 实机验证。** 源码 ZIP 与 IPA 是不同文件。
 
 ## 只有 Windows：使用 GitHub 云端编译
 
@@ -22,7 +24,7 @@ bash build-ipa.command
 
 **不需要连接 iPhone、登录 Apple 账号、准备证书或购买开发者会员即可构建这个未签名包。** 安装时由你自行完成签名。
 
-若编译报错，将 `output/build-时间戳.log` 发回本任务继续修复。第一次 Mac 编译尚未执行，因此不能承诺此工程已经编译通过。
+若编译报错，将 `output/build-时间戳.log` 发回本任务继续修复。后续重新编译以当次构建结果为准。
 
 可用 `bash verify-on-mac.command` 检查模拟器构建；也可以直接打开 `ScreenTester.xcodeproj`。不需要安装 Python、Homebrew、CocoaPods。`generate_project.py` 仅为维护工具，工程文件已经生成；在 Xcode 修改后不要重新运行生成器覆盖修改。
 
@@ -37,13 +39,13 @@ bash build-ipa.command
 | 圆角 | 四角独立调节并保存；初始 180 px 是校准起点，不是 iPhone 17 实测值；使用圆弧近似 |
 | 纯色与坏点 | 红绿蓝、黑白、青、品红、黄；轻点切换 |
 | 灰阶、白平衡 | 连续渐变、16/32/256 级灰阶及八级全屏灰度 |
-| 彩条 | 100%/75% RGB 彩条、六色色阶和网格；未移植原版 SMPTE/ARIB 专业复合图 |
+| 彩条 | 100%/75% RGB 彩条、六色色阶和网格 |
 | HDR | 系统 EDR 余量和最大刷新率信息；未实现 HDR 内容渲染及峰值亮度测量 |
 | 触控 | 网格覆盖、实时多指位置、当前/本次最大触点数 |
 | 触控频率 | 最近 1 秒单指 coalescedTouches 时间戳估算；不声称是硬件采样率 |
 | 设置 | 保存描边、颜色、PPI、圆角；可选择测试临时最高亮度，退出/后台恢复 |
 
-Android 自动更新、Android 系统圆角读取、Material/Monet 主题未移植。iOS 使用原生界面。当前不是与 Android 版完全等价的已验证正式版本。
+使用 iOS 原生界面；不提供系统物理圆角读取、SMPTE/ARIB 复合信号图或 HDR 内容渲染。
 
 长按 2 秒退出测试；色彩类轻点切换，提示 2.5 秒后隐藏。触控测试中停住长按也会退出。圆角面板中滑动四个滑块，轻点空白可隐藏或显示面板。
 
@@ -52,9 +54,3 @@ iPhone 17 官方像素密度为 460 ppi，1 px 换算约 0.0552 mm，这只是�
 官方规格：https://www.apple.com.cn/iphone-17/specs/
 
 所有触控统计留在内存中，设置保存在本机；不请求网络、相机、麦克风或照片权限。
-
-## 上游
-
-原项目：https://github.com/byHydrogen/ScreenTester
-
-参考提交：`eff1098dff6cb9a8af578d528a02a8caeed4c44d`。原作者：byHydrogen。参见 `UPSTREAM-NOTICE.md`。
