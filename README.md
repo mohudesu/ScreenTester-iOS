@@ -1,6 +1,6 @@
 # ScreenTester iOS
 
-基于 byHydrogen/ScreenTester 功能重写的非官方 Swift/UIKit iPhone 应用，目标设备为 iPhone 17。
+用于iPhone的 应用，目标设备为 iPhone 17。
 
 GitHub Actions 编译未签名 IPA，由用户自行签名。
 
