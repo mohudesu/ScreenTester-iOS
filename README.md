@@ -1,5 +1,4 @@
-![Uploading 04-Home-dark.png…]()
-![Uploading 01-Home.png…]()
+
 # ScreenTester iOS
 
 由 **mohudesu** 维护的 iPhone 屏幕测试工具，使用 Swift/UIKit，面向 iPhone 17，支持 iOS 17.0 及以上。
