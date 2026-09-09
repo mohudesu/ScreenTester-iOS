@@ -4,11 +4,13 @@
 
 目标：iPhone 17 使用的未签名 IPA，由用户自行签名。Swift/UIKit 原生实现，最低 iOS 17.0，竖屏，无第三方依赖。
 
-**本项目已通过 GitHub 云端 Xcode 设备编译，生成未签名 IPA；尚未经过 iPhone 实机验证。** 源码 ZIP 与 IPA 是不同文件。
+**v0.2.0 已发布：[下载未签名 IPA](https://github.com/mohudesu/ScreenTester-iOS/releases/download/v0.2.0/ScreenTester-iPhone17-unsigned.ipa)。** 已通过 GitHub 云端 Xcode 设备编译、iPhone 17 模拟器界面测试及安装包完整性校验；尚未经过 iPhone 实机验证。
+
+首页与设置页采用新拟态风格，支持浅色/深色主题、动态字体及按压反馈。首页按边缘与校准、色彩与显示、触控与响应分组。
 
 ## 只有 Windows：使用 GitHub 云端编译
 
-已提供 `.github/workflows/build-ios.yml`。将本文件夹里的所有文件上传到你自己的仓库根目录，点击 Actions → Build unsigned IPA → Run workflow。成功后在 Artifacts 下载 ScreenTester-unsigned-IPA。完整步骤见 `GITHUB-使用说明.md`。不需要 Apple 账号或签名材料。
+当前仓库已配置 `.github/workflows/build-ios.yml`。点击 Actions → Build unsigned IPA → Run workflow，可重新运行模拟器测试并编译。成功后在 Artifacts 下载 ScreenTester-unsigned-IPA。已发布版本可直接在 Releases 下载；完整步骤见 `GITHUB-使用说明.md`。不需要 Apple 账号或签名材料。
 
 ## 在 Mac 上生成未签名 IPA
 
@@ -26,7 +28,7 @@ bash build-ipa.command
 
 若编译报错，将 `output/build-时间戳.log` 发回本任务继续修复。后续重新编译以当次构建结果为准。
 
-可用 `bash verify-on-mac.command` 检查模拟器构建；也可以直接打开 `ScreenTester.xcodeproj`。不需要安装 Python、Homebrew、CocoaPods。`generate_project.py` 仅为维护工具，工程文件已经生成；在 Xcode 修改后不要重新运行生成器覆盖修改。
+可用 `bash verify-on-mac.command` 检查模拟器构建；`bash test-ui.command` 会在已安装的 iPhone 模拟器上运行界面测试并保存截图，该测试脚本需要 Python 3。也可以直接打开 `ScreenTester.xcodeproj`。仅编译 IPA 不需要 Python、Homebrew、CocoaPods。`generate_project.py` 仅为维护工具，工程文件已经生成；在 Xcode 修改后不要重新运行生成器覆盖修改。
 
 请按 `DEVICE-CHECKLIST.md` 完成自签后的实机验证，尤其是像素边缘、圆角和触控统计。
 

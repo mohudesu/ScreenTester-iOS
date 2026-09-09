@@ -2,7 +2,9 @@
 
 你只需要浏览器和 GitHub 账号。实际编译由 GitHub 的 macOS 机器运行，不需要本地 Mac、Xcode、Apple 账号、证书或开发者会员。生成的 IPA 由你自行签名。
 
-当前交付的是配置好的源码工程。云端构建尚未运行；成功运行才能拿到 IPA，不能把源码 ZIP 改名当成 IPA。
+**v0.2.0 新拟态版本已发布，可以直接 [下载 IPA](https://github.com/mohudesu/ScreenTester-iOS/releases/download/v0.2.0/ScreenTester-iPhone17-unsigned.ipa)，无需自己编译。** [Release 页面](https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.2.0) 同时提供校验文件。已通过 iPhone 17 模拟器界面测试、ARM64 设备编译和 IPA 完整性校验，安装前仍需自行签名。
+
+当前仓库已经配置好。需要重新编译时，可直接跳到第 3 步；第 1、2 步供迁移到新仓库时参考。
 
 ## 1. 创建你自己的仓库
 
@@ -24,7 +26,9 @@
     build-ios.yml
 ScreenTester/
 ScreenTester.xcodeproj/
+UITests/
 build-ipa.command
+test-ui.command
 verify-on-mac.command
 ...
 ```
@@ -39,13 +43,15 @@ verify-on-mac.command
 
 如果没有显示任务或运行按钮，检查配置是否上传到了默认分支，以及仓库 Settings → Actions → General 是否允许 GitHub Actions。配置使用 GitHub 官方的 checkout、upload-artifact 两个 action。
 
-进入运行详情，可查看 Check project and Xcode、Build and package unsigned IPA 的输出。
+进入运行详情，可查看 Check project and Xcode、Verify UI in iPhone simulator、Build and package unsigned IPA 的输出。
 
 ## 4. 下载 IPA
 
 运行成功显示绿色对勾后，打开该次运行详情，在页面底部 **Artifacts** 点击 **ScreenTester-unsigned-IPA**。浏览器可能下载一个 ZIP，将它解压，里面的 `ScreenTester-unsigned-时间戳.ipa` 才是可用于自签的包；另一文件是 SHA-256。
 
 构建产物设置为保留 7 天（这是 GitHub 下载文件的保留期限，不是签名有效期）。可在过期后重新运行构建。
+
+Release 附件不受 Artifacts 的 7 天期限影响。界面截图在 **ScreenTester-interface-previews**。发布流程会在 main 分支构建成功后创建 v0.2.0 Release；如果版本已存在，就保留已发布文件。重新编译的结果请从对应运行的 Artifacts 下载。发布后续版本时，需要同时更新应用版本和 `.github/workflows/release-ios.yml` 中的版本标签与说明。
 
 ## 编译失败怎么办
 
