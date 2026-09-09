@@ -5,8 +5,14 @@
 
 提供黑边检测、像素分区、圆角校准、纯色、灰阶、白平衡、彩条、触控网格和多指触控测试。
 
-**v0.2.0 已发布。** 首页与设置页采用新拟态风格，包含柔和双向阴影、分组卡片、浅色/深色主题、动态字体和按压反馈。
+<img src="ScreenTester/Assets.xcassets/AppIcon.appiconset/AppIcon.png" width="144" alt="ScreenTester 动漫头像图标">
 
-[下载未签名 IPA](https://github.com/mohudesu/ScreenTester-iOS/releases/latest) · [云端构建](https://github.com/mohudesu/ScreenTester-iOS/actions/workflows/build-ios.yml) · [使用说明](GITHUB-使用说明.md)
+**v0.3.0：全新动漫头像图标，以及新拟态 / Liquid Glass 双风格界面。**
 
-已通过 iPhone 17 模拟器的首页跳转、设置保存、全屏测试退出检查，以及 ARM64 设备编译和 IPA 完整性校验，详见 [验证记录](VALIDATION.json)。IPA 需自行签名，iPhone 实机效果仍需验证；圆角及毫米读数为观察参考，触控事件频率不代表硬件采样率。
+新增 Liquid Glass 风格，可在「首页右上角设置 → 界面风格」切换新拟态 / Liquid Glass。选择立即应用并保存在本机，检测参数保持不变。支持浅色/深色、大字、减少动态效果及减少透明度；首次启动沿用新拟态。
+
+[使用与交付说明](LOCAL-交付说明.md) · [交互预览](Preview/index.html) · [构建记录](CLOUD-BUILD.json) · [图标生成说明](Design/ICON-PROMPT.md)
+
+Windows 可直接用浏览器打开 `Preview/index.html` 比较界面；网页预览不是 iOS 运行结果。原生玻璃材质需 Xcode 26 / iOS 26，较旧系统使用磨砂兼容效果。在 Mac 工程目录运行 `bash test-ui.command` 验证界面，运行 `bash build-ipa.command` 生成未签名 IPA。
+
+本次提交将触发 GitHub 的 macOS 构建与 iPhone 模拟器测试。构建成功后发布 v0.3.0 未签名 IPA，供自行签名安装。当前结果以 [Actions](https://github.com/mohudesu/ScreenTester-iOS/actions) 和 `CLOUD-BUILD.json` 为准。

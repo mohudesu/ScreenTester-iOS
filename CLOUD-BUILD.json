@@ -1,0 +1,9 @@
+{
+  "app_version": "0.3.0",
+  "app_build": "4",
+  "delivery_scope": "Local unsigned IPA and GitHub release",
+  "github_actions_execution": "PENDING: preparing source upload",
+  "ipa_generated": false,
+  "previous_release_report": "CLOUD-BUILD-v0.2.0.json",
+  "note": "This report will be updated after the v0.3.0 workflow completes."
+}

@@ -1,0 +1,16 @@
+{
+  "checked_at": "2026-09-09T10:06:23.336781+00:00",
+  "artifact": "Preview/index.html",
+  "scope": "Browser interaction preview only; not a native iOS runtime test",
+  "checks": {
+    "home_and_settings_navigation": "PASS",
+    "neumorphic_and_liquid_switch": "PASS",
+    "style_persists_after_reload": "PASS",
+    "width_color_brightness_preserved_across_style_switch": "PASS",
+    "light_and_dark_visual_review": "PASS",
+    "large_text_single_column_at_402px": "PASS",
+    "reduce_transparency_at_402px": "PASS",
+    "browser_console_errors": "NONE observed"
+  },
+  "source_sha256": "8715447c1ab0c2a32ae52e917786b8c7eccba1dce64226264595dc114d62ceba"
+}

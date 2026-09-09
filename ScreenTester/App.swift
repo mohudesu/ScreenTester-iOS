@@ -32,8 +32,12 @@ enum TestKind: Int, CaseIterable {
 final class Preferences {
     static let shared = Preferences()
     private let defaults = UserDefaults.standard
+    var interfaceStyle: InterfaceStyle {
+        get { InterfaceStyle(rawValue: defaults.string(forKey: "interfaceStyle") ?? "") ?? .neumorphic }
+        set { defaults.set(newValue.rawValue, forKey: "interfaceStyle") }
+    }
     var width: CGFloat {
-        get { CGFloat(defaults.object(forKey: "width") as? Double ?? 2) }
+        get { CGFloat((defaults.object(forKey: "width") as? Double) ?? 2) }
         set { defaults.set(Double(newValue), forKey: "width") }
     }
     var radii: [CGFloat] {
@@ -41,7 +45,7 @@ final class Preferences {
         set { defaults.set(newValue.map { Double($0) }, forKey: "radii") }
     }
     var ppi: CGFloat {
-        get { CGFloat(defaults.object(forKey: "ppi") as? Double ?? 460) }
+        get { CGFloat((defaults.object(forKey: "ppi") as? Double) ?? 460) }
         set { defaults.set(Double(newValue), forKey: "ppi") }
     }
     var colorIndex: Int {

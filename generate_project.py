@@ -3,7 +3,6 @@ from pathlib import Path
 import json
 import plistlib
 import struct
-import zlib
 
 ROOT = Path(__file__).resolve().parent
 SOURCE = ROOT / 'ScreenTester'
@@ -17,7 +16,7 @@ def obj(key, **values):
     return ident
 
 files = [obj(100+i, isa='PBXFileReference', lastKnownFileType='sourcecode.swift', path=name, sourceTree='<group>')
-         for i, name in enumerate(['App.swift', 'TestController.swift', 'TestCanvas.swift', 'Interface.swift'])]
+         for i, name in enumerate(['App.swift', 'TestController.swift', 'TestCanvas.swift', 'Interface.swift', 'Appearance.swift'])]
 info = obj(13, isa='PBXFileReference', lastKnownFileType='text.plist.xml', path='Info.plist', sourceTree='<group>')
 assets = obj(14, isa='PBXFileReference', lastKnownFileType='folder.assetcatalog', path='Assets.xcassets', sourceTree='<group>')
 product = obj(15, isa='PBXFileReference', explicitFileType='wrapper.application', includeInIndex=0, path='ScreenTester.app', sourceTree='BUILT_PRODUCTS_DIR')
@@ -30,7 +29,7 @@ app_group = obj(40, isa='PBXGroup', children=files+[info, assets], path='ScreenT
 products = obj(41, isa='PBXGroup', children=[product], name='Products', sourceTree='<group>')
 main = obj(42, isa='PBXGroup', children=[app_group, products], sourceTree='<group>')
 project_settings = dict(CLANG_ENABLE_MODULES='YES', CLANG_ENABLE_OBJC_ARC='YES', SDKROOT='iphoneos', IPHONEOS_DEPLOYMENT_TARGET='17.0', SWIFT_VERSION='5.0')
-target_settings = dict(PRODUCT_NAME='$(TARGET_NAME)', PRODUCT_BUNDLE_IDENTIFIER='com.local.screentester', INFOPLIST_FILE='ScreenTester/Info.plist', GENERATE_INFOPLIST_FILE='NO', CODE_SIGN_STYLE='Automatic', TARGETED_DEVICE_FAMILY='1', SUPPORTED_PLATFORMS='iphoneos iphonesimulator', SUPPORTS_MACCATALYST='NO', SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD='NO', ASSETCATALOG_COMPILER_APPICON_NAME='AppIcon', LD_RUNPATH_SEARCH_PATHS=['$(inherited)', '@executable_path/Frameworks'], CURRENT_PROJECT_VERSION='3', MARKETING_VERSION='0.2.0')
+target_settings = dict(PRODUCT_NAME='$(TARGET_NAME)', PRODUCT_BUNDLE_IDENTIFIER='com.local.screentester', INFOPLIST_FILE='ScreenTester/Info.plist', GENERATE_INFOPLIST_FILE='NO', CODE_SIGN_STYLE='Automatic', TARGETED_DEVICE_FAMILY='1', SUPPORTED_PLATFORMS='iphoneos iphonesimulator', SUPPORTS_MACCATALYST='NO', SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD='NO', ASSETCATALOG_COMPILER_APPICON_NAME='AppIcon', LD_RUNPATH_SEARCH_PATHS=['$(inherited)', '@executable_path/Frameworks'], CURRENT_PROJECT_VERSION='4', MARKETING_VERSION='0.3.0')
 p_debug = obj(50, isa='XCBuildConfiguration', name='Debug', buildSettings={**project_settings, 'SWIFT_OPTIMIZATION_LEVEL': '-Onone', 'DEBUG_INFORMATION_FORMAT': 'dwarf', 'ENABLE_TESTABILITY': 'YES', 'SWIFT_ACTIVE_COMPILATION_CONDITIONS': 'DEBUG'})
 p_release = obj(51, isa='XCBuildConfiguration', name='Release', buildSettings={**project_settings, 'SWIFT_OPTIMIZATION_LEVEL': '-O', 'DEBUG_INFORMATION_FORMAT': 'dwarf-with-dsym', 'SWIFT_COMPILATION_MODE': 'wholemodule'})
 t_debug = obj(52, isa='XCBuildConfiguration', name='Debug', buildSettings=target_settings.copy())
@@ -86,25 +85,12 @@ test_ref = f'<BuildableReference BuildableIdentifier="primary" BlueprintIdentifi
 </Scheme>
 ''', encoding='utf-8')
 
-# Simple geometric test-frame icon, generated as a code-native app asset.
+# Keep the committed artwork when regenerating the Xcode project.
 asset_dir = SOURCE / 'Assets.xcassets' / 'AppIcon.appiconset'
 asset_dir.mkdir(parents=True, exist_ok=True)
 (asset_dir.parent / 'Contents.json').write_text(json.dumps({'info': {'author': 'xcode', 'version': 1}}), encoding='utf-8')
 (asset_dir / 'Contents.json').write_text(json.dumps({'images': [{'filename': 'AppIcon.png', 'idiom': 'universal', 'platform': 'ios', 'size': '1024x1024'}], 'info': {'author': 'xcode', 'version': 1}}, indent=2), encoding='utf-8')
-def chunk(kind, data):
-    return struct.pack('>I', len(data)) + kind + data + struct.pack('>I', zlib.crc32(kind + data) & 0xffffffff)
-pixels = bytearray()
-for y in range(1024):
-    pixels.append(0)
-    for x in range(1024):
-        color = (13, 20, 31)
-        outer = 190 <= x < 834 and 120 <= y < 904
-        inner = 218 <= x < 806 and 148 <= y < 876
-        if outer and not inner:
-            color = (68, 226, 179)
-        if 292 <= x < 732 and 350 <= y < 674:
-            color = [(247, 94, 99), (80, 215, 153), (80, 153, 245)][min(2, (x-292)//147)]
-        pixels.extend(color)
-png = b'\x89PNG\r\n\x1a\n' + chunk(b'IHDR', struct.pack('>IIBBBBB', 1024, 1024, 8, 2, 0, 0, 0)) + chunk(b'IDAT', zlib.compress(pixels, 9)) + chunk(b'IEND', b'')
-(asset_dir / 'AppIcon.png').write_bytes(png)
-print('Generated Xcode project, Info.plist, scheme and icon; Xcode compilation still required.')
+icon = (asset_dir / 'AppIcon.png').read_bytes()
+assert icon[:8] == b'\x89PNG\r\n\x1a\n', 'AppIcon.png must be a PNG'
+assert struct.unpack('>IIBB', icon[16:26]) == (1024, 1024, 8, 2), 'AppIcon.png must be 1024 x 1024, opaque RGB'
+print('Generated Xcode project, Info.plist and scheme; preserved AppIcon.png. Xcode compilation still required.')
