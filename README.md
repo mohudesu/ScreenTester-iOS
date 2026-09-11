@@ -15,4 +15,6 @@
 
 Windows 可直接用浏览器打开 `Preview/index.html` 比较界面；网页预览不是 iOS 运行结果。原生玻璃材质需 Xcode 26 / iOS 26，较旧系统使用磨砂兼容效果。在 Mac 工程目录运行 `bash test-ui.command` 验证界面，运行 `bash build-ipa.command` 生成未签名 IPA。
 
-本次提交将触发 GitHub 的 macOS 构建与 iPhone 模拟器测试。构建成功后发布 v0.3.0 未签名 IPA，供自行签名安装。当前结果以 [Actions](https://github.com/mohudesu/ScreenTester-iOS/actions) 和 `CLOUD-BUILD.json` 为准。
+**[下载 v0.3.0 未签名 IPA](https://github.com/mohudesu/ScreenTester-iOS/releases/download/v0.3.0/ScreenTester-iPhone17-unsigned.ipa)** · [Release 与校验文件](https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.0)
+
+已通过 Xcode ARM64 设备编译、iPhone 17 模拟器两项界面测试和 IPA 完整性校验。软件包需要自行签名后安装；实机验证尚未进行。具体版本、构建提交和校验值见 `CLOUD-BUILD.json`。

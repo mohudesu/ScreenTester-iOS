@@ -1,6 +1,8 @@
 # ScreenTester iOS v0.3.0 · 动漫头像与双风格版
 
-本次更新应用的桌面图标，并将双风格界面一起发布到 GitHub。新版 IPA 由云端 macOS/Xcode 构建后保存到本地。构建状态及文件校验记录见 `CLOUD-BUILD.json`。
+本次更新应用的桌面图标，并将双风格界面一起发布到 GitHub。新版 IPA 已由云端 macOS/Xcode 构建，下载到工程文件夹的上一级目录：`ScreenTester-iPhone17-v0.3.0-unsigned.ipa`（1,912,690 字节）。构建状态及文件校验记录见 `CLOUD-BUILD.json`。
+
+[GitHub v0.3.0 Release](https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.0) 提供相同软件包。已通过 ARM64 设备编译、两项 iPhone 17 模拟器界面测试和下载后校验；自签与实机验证由使用者完成。
 
 桌面图标使用银蓝发、蓝绿眼睛的动漫小人头像；资源为 1024 × 1024 不透明 RGB PNG，iOS 自动裁切圆角。图标和生成提示词保存在项目中，重新生成 Xcode 工程会保留图标。
 

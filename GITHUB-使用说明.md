@@ -4,7 +4,7 @@
 
 你只需要浏览器和 GitHub 账号。实际编译由 GitHub 的 macOS 机器运行，不需要本地 Mac、Xcode、Apple 账号、证书或开发者会员。生成的 IPA 由你自行签名。
 
-构建及测试通过后，[Releases](https://github.com/mohudesu/ScreenTester-iOS/releases) 提供 `ScreenTester-iPhone17-unsigned.ipa` 和 SHA-256 校验文件。安装前自行签名。
+**[v0.3.0 Release](https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.0) 已发布**，提供 `ScreenTester-iPhone17-unsigned.ipa` 和 SHA-256 校验文件。安装前自行签名。
 
 当前仓库已经配置好。需要重新编译时，可直接跳到第 3 步；第 1、2 步供迁移到新仓库时参考。
 

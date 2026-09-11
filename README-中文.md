@@ -6,7 +6,7 @@
 
 目标：iPhone 17 使用的未签名 IPA，由用户自行签名。Swift/UIKit 原生实现，最低 iOS 17.0，竖屏，无第三方依赖。
 
-本版本由 GitHub Actions 运行 Xcode 设备编译和 iPhone 模拟器界面测试，通过后发布未签名 IPA。请在 [Actions](https://github.com/mohudesu/ScreenTester-iOS/actions) 查看当前构建，在 [Releases](https://github.com/mohudesu/ScreenTester-iOS/releases) 下载完成的版本。
+**v0.3.0 已发布：[下载 IPA](https://github.com/mohudesu/ScreenTester-iOS/releases/download/v0.3.0/ScreenTester-iPhone17-unsigned.ipa)。** 已通过 GitHub Actions 的 Xcode ARM64 设备编译、iPhone 17 模拟器两项界面测试及安装包完整性校验。[Release 页面](https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.0) 提供 SHA-256 校验文件；安装前自行签名。实机验证尚未进行。
 
 首页与设置页采用新拟态风格，支持浅色/深色主题、动态字体及按压反馈。首页按边缘与校准、色彩与显示、触控与响应分组。
 

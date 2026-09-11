@@ -1,9 +1,55 @@
 {
   "app_version": "0.3.0",
   "app_build": "4",
-  "delivery_scope": "Local unsigned IPA and GitHub release",
-  "github_actions_execution": "PENDING: preparing source upload",
-  "ipa_generated": false,
+  "download_sha256": "PASS",
+  "ipa_container_crc": "PASS",
+  "macho_platform": "iOS device",
+  "macho_architecture": "arm64",
+  "encrypted": false,
+  "embedded_provisioning_profile": false,
+  "code_signature_directory": false,
+  "app_icon_name": "AppIcon",
+  "compiled_icon_files": [
+    "Payload/ScreenTester.app/AppIcon60x60@2x.png",
+    "Payload/ScreenTester.app/AppIcon76x76@2x~ipad.png"
+  ],
+  "ipa_generated": true,
+  "ipa_file": "ScreenTester-iPhone17-v0.3.0-unsigned.ipa",
+  "ipa_bytes": 1912690,
+  "ipa_sha256": "4eb24789c6c291705aeddb1338b3a823d422cc45a23bcf77b1284673b6a0089b",
+  "bundle_identifier": "com.local.screentester",
+  "minimum_ios": "17.0",
+  "verified_at": "2026-09-11T01:28:33.180121+00:00",
+  "github_actions_execution": "PASS",
+  "swift_compilation": "PASS: Release iphoneos arm64, Xcode 26.6, SDK 26.5",
+  "native_simulator_execution": "PASS: iPhone 17, 2 tests, 0 failures",
+  "ui_tests": [
+    {
+      "name": "testHomeSettingsAndFullscreenReturn",
+      "result": "PASS"
+    },
+    {
+      "name": "testStyleSwitchPersistsAndPreservesTestSettings",
+      "result": "PASS"
+    }
+  ],
+  "light_interface_visual_review": "PASS: Liquid Glass home/settings and neumorphic home",
+  "additional_dark_validation": {
+    "status": "PASS: complete workflow including XCTest dark-mode home/settings/fullscreen regression and ARM64 rebuild",
+    "run_url": "https://github.com/mohudesu/ScreenTester-iOS/actions/runs/34550711785",
+    "source_commit": "a50a02b6cab8fe6650b0ec4b01a6ec036089d699",
+    "change": "Test script waits for the home UI before screenshots; application sources and icon are unchanged.",
+    "completed_at": "2026-09-11T01:39:48Z"
+  },
+  "iphone_device_validation": "NOT RUN: user will self-sign and test",
+  "source_commit": "8e865992a2eedbeb784276c345ec4cb47387cb46",
+  "run_url": "https://github.com/mohudesu/ScreenTester-iOS/actions/runs/34342657148",
+  "release_run_url": "https://github.com/mohudesu/ScreenTester-iOS/actions/runs/34343602970",
+  "release_url": "https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.0",
+  "release_download_url": "https://github.com/mohudesu/ScreenTester-iOS/releases/download/v0.3.0/ScreenTester-iPhone17-unsigned.ipa",
+  "artifact_id": 10100726861,
+  "app_icon_sha256": "a95f531f4cfa57c9756cc00e7f56ad46f89c796ce93fae00d3881d75589e730f",
+  "local_production_source_matches_release_commit": "PASS: all 11 files in ScreenTester and ScreenTester.xcodeproj match the release commit",
   "previous_release_report": "CLOUD-BUILD-v0.2.0.json",
-  "note": "This report will be updated after the v0.3.0 workflow completes."
+  "compiled_icon_visual_review": "PASS: anime avatar decoded and inspected from the IPA AppIcon60x60@2x.png"
 }
