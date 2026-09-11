@@ -27,6 +27,23 @@ final class TestController: UIViewController, UIGestureRecognizerDelegate {
         exit.cancelsTouchesInView = false
         exit.delegate = self
         canvas.addGestureRecognizer(exit)
+        if kind == .border {
+            let modelTitle = UILabel()
+            modelTitle.text = DeviceModel.borderTitle
+            modelTitle.accessibilityIdentifier = "test.border.deviceTitle"
+            modelTitle.font = UIFontMetrics(forTextStyle: .headline).scaledFont(for: .systemFont(ofSize: 20, weight: .semibold))
+            modelTitle.adjustsFontForContentSizeCategory = true
+            modelTitle.textColor = .white
+            modelTitle.numberOfLines = 0
+            modelTitle.textAlignment = .center
+            modelTitle.translatesAutoresizingMaskIntoConstraints = false
+            canvas.addSubview(modelTitle)
+            NSLayoutConstraint.activate([
+                modelTitle.centerXAnchor.constraint(equalTo: canvas.centerXAnchor),
+                modelTitle.centerYAnchor.constraint(equalTo: canvas.centerYAnchor),
+                modelTitle.widthAnchor.constraint(lessThanOrEqualTo: canvas.widthAnchor, constant: -64)
+            ])
+        }
         if !kind.isTouch {
             let tap = UITapGestureRecognizer(target: self, action: #selector(nextPattern))
             tap.delegate = self

@@ -16,7 +16,7 @@ def obj(key, **values):
     return ident
 
 files = [obj(100+i, isa='PBXFileReference', lastKnownFileType='sourcecode.swift', path=name, sourceTree='<group>')
-         for i, name in enumerate(['App.swift', 'TestController.swift', 'TestCanvas.swift', 'Interface.swift', 'Appearance.swift'])]
+         for i, name in enumerate(['App.swift', 'TestController.swift', 'TestCanvas.swift', 'Interface.swift', 'Appearance.swift', 'DeviceModel.swift'])]
 info = obj(13, isa='PBXFileReference', lastKnownFileType='text.plist.xml', path='Info.plist', sourceTree='<group>')
 assets = obj(14, isa='PBXFileReference', lastKnownFileType='folder.assetcatalog', path='Assets.xcassets', sourceTree='<group>')
 product = obj(15, isa='PBXFileReference', explicitFileType='wrapper.application', includeInIndex=0, path='ScreenTester.app', sourceTree='BUILT_PRODUCTS_DIR')
@@ -29,7 +29,7 @@ app_group = obj(40, isa='PBXGroup', children=files+[info, assets], path='ScreenT
 products = obj(41, isa='PBXGroup', children=[product], name='Products', sourceTree='<group>')
 main = obj(42, isa='PBXGroup', children=[app_group, products], sourceTree='<group>')
 project_settings = dict(CLANG_ENABLE_MODULES='YES', CLANG_ENABLE_OBJC_ARC='YES', SDKROOT='iphoneos', IPHONEOS_DEPLOYMENT_TARGET='17.0', SWIFT_VERSION='5.0')
-target_settings = dict(PRODUCT_NAME='$(TARGET_NAME)', PRODUCT_BUNDLE_IDENTIFIER='com.local.screentester', INFOPLIST_FILE='ScreenTester/Info.plist', GENERATE_INFOPLIST_FILE='NO', CODE_SIGN_STYLE='Automatic', TARGETED_DEVICE_FAMILY='1', SUPPORTED_PLATFORMS='iphoneos iphonesimulator', SUPPORTS_MACCATALYST='NO', SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD='NO', ASSETCATALOG_COMPILER_APPICON_NAME='AppIcon', LD_RUNPATH_SEARCH_PATHS=['$(inherited)', '@executable_path/Frameworks'], CURRENT_PROJECT_VERSION='4', MARKETING_VERSION='0.3.0')
+target_settings = dict(PRODUCT_NAME='$(TARGET_NAME)', PRODUCT_BUNDLE_IDENTIFIER='com.local.screentester', INFOPLIST_FILE='ScreenTester/Info.plist', GENERATE_INFOPLIST_FILE='NO', CODE_SIGN_STYLE='Automatic', TARGETED_DEVICE_FAMILY='1', SUPPORTED_PLATFORMS='iphoneos iphonesimulator', SUPPORTS_MACCATALYST='NO', SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD='NO', ASSETCATALOG_COMPILER_APPICON_NAME='AppIcon', LD_RUNPATH_SEARCH_PATHS=['$(inherited)', '@executable_path/Frameworks'], CURRENT_PROJECT_VERSION='5', MARKETING_VERSION='0.3.1')
 p_debug = obj(50, isa='XCBuildConfiguration', name='Debug', buildSettings={**project_settings, 'SWIFT_OPTIMIZATION_LEVEL': '-Onone', 'DEBUG_INFORMATION_FORMAT': 'dwarf', 'ENABLE_TESTABILITY': 'YES', 'SWIFT_ACTIVE_COMPILATION_CONDITIONS': 'DEBUG'})
 p_release = obj(51, isa='XCBuildConfiguration', name='Release', buildSettings={**project_settings, 'SWIFT_OPTIMIZATION_LEVEL': '-O', 'DEBUG_INFORMATION_FORMAT': 'dwarf-with-dsym', 'SWIFT_COMPILATION_MODE': 'wholemodule'})
 t_debug = obj(52, isa='XCBuildConfiguration', name='Debug', buildSettings=target_settings.copy())

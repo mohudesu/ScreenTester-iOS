@@ -94,8 +94,8 @@ def main():
     for entry in objects.values():
         settings = entry.get('buildSettings', {})
         if settings.get('PRODUCT_BUNDLE_IDENTIFIER') == 'com.local.screentester':
-            assert settings['MARKETING_VERSION'] == '0.3.0'
-            assert settings['CURRENT_PROJECT_VERSION'] == '4'
+            assert settings['MARKETING_VERSION'] == '0.3.1'
+            assert settings['CURRENT_PROJECT_VERSION'] == '5'
     info = plistlib.loads((root / 'ScreenTester/Info.plist').read_bytes())
     assert info['CFBundlePackageType'] == 'APPL'
     assert info['UIApplicationSceneManifest']['UIApplicationSupportsMultipleScenes'] is False
@@ -134,8 +134,8 @@ def main():
 
     report = {
         'checked_at': datetime.datetime.now(datetime.timezone.utc).isoformat(),
-        'app_version': '0.3.0',
-        'app_build': '4',
+        'app_version': '0.3.1',
+        'app_build': '5',
         'report_scope': 'Offline source checks; see CLOUD-BUILD.json for native build results',
         'project_object_references': 'PASS',
         'source_paths_and_compile_phases': 'PASS',

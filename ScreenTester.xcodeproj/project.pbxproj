@@ -35,6 +35,12 @@
 			"path" = "Appearance.swift";
 			"sourceTree" = "<group>";
 		};
+		"000000000000000000000069" = {
+			"isa" = "PBXFileReference";
+			"lastKnownFileType" = "sourcecode.swift";
+			"path" = "DeviceModel.swift";
+			"sourceTree" = "<group>";
+		};
 		"00000000000000000000000D" = {
 			"isa" = "PBXFileReference";
 			"lastKnownFileType" = "text.plist.xml";
@@ -74,6 +80,10 @@
 			"isa" = "PBXBuildFile";
 			"fileRef" = "000000000000000000000068";
 		};
+		"0000000000000000000000CD" = {
+			"isa" = "PBXBuildFile";
+			"fileRef" = "000000000000000000000069";
+		};
 		"000000000000000000000018" = {
 			"isa" = "PBXBuildFile";
 			"fileRef" = "00000000000000000000000E";
@@ -87,6 +97,7 @@
 				"0000000000000000000000CA",
 				"0000000000000000000000CB",
 				"0000000000000000000000CC",
+				"0000000000000000000000CD",
 			);
 			"runOnlyForDeploymentPostprocessing" = 0;
 		};
@@ -113,6 +124,7 @@
 				"000000000000000000000066",
 				"000000000000000000000067",
 				"000000000000000000000068",
+				"000000000000000000000069",
 				"00000000000000000000000D",
 				"00000000000000000000000E",
 			);
@@ -184,8 +196,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				"CURRENT_PROJECT_VERSION" = "4";
-				"MARKETING_VERSION" = "0.3.0";
+				"CURRENT_PROJECT_VERSION" = "5";
+				"MARKETING_VERSION" = "0.3.1";
 			};
 		};
 		"000000000000000000000035" = {
@@ -206,8 +218,8 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				"CURRENT_PROJECT_VERSION" = "4";
-				"MARKETING_VERSION" = "0.3.0";
+				"CURRENT_PROJECT_VERSION" = "5";
+				"MARKETING_VERSION" = "0.3.1";
 			};
 		};
 		"000000000000000000000036" = {

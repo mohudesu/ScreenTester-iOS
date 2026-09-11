@@ -51,7 +51,7 @@ final class HomeController: StyledPageController {
 
         let hero = ThemedSurface(prominent: true)
         let tag = AppTheme.label("从屏幕边缘开始", size: 12, weight: .semibold, secondary: true)
-        let heroTitle = AppTheme.label("黑边遮挡测试", size: 23, weight: .bold)
+        let heroTitle = AppTheme.label(DeviceModel.borderTitle, size: 23, weight: .bold)
         let description = AppTheme.label("点亮屏幕轮廓，观察钢化膜是否遮住显示区域。", size: 14, secondary: true)
         let start = AppTheme.label("开始检测  ↗", size: 15, weight: .bold)
         start.textColor = AppTheme.accent
@@ -136,6 +136,7 @@ final class SettingsController: StyledPageController {
         stack.addArrangedSubview(AppTheme.label("调到刚刚好。", size: 27, weight: .bold))
         stack.addArrangedSubview(AppTheme.label("参数会自动保存，下一次测试继续使用。", size: 14, secondary: true))
         addStylePicker()
+        addColorSchemePicker()
 
         func section(_ views: [UIView]) {
             let surface = ThemedSurface()
@@ -208,6 +209,21 @@ final class SettingsController: StyledPageController {
             navigationItem.compactAppearance = appearance
         }
         navigationController?.navigationBar.tintColor = AppTheme.accent
+    }
+    private func addColorSchemePicker() {
+        let picker = UISegmentedControl(items: AppColorScheme.allCases.map { $0.title })
+        picker.selectedSegmentIndex = AppColorScheme.allCases.firstIndex(of: Preferences.shared.colorScheme) ?? 0
+        picker.accessibilityIdentifier = "settings.appearance"
+        picker.accessibilityLabel = "深色模式"
+        picker.heightAnchor.constraint(greaterThanOrEqualToConstant: 44).isActive = true
+        picker.addAction(UIAction { [weak self, weak picker] _ in
+            guard let picker, AppColorScheme.allCases.indices.contains(picker.selectedSegmentIndex) else { return }
+            AppColorScheme.apply(AppColorScheme.allCases[picker.selectedSegmentIndex])
+            self?.refreshAppearance()
+        }, for: .valueChanged)
+        let status = AppTheme.label("当前外观：\(traitCollection.userInterfaceStyle == .dark ? "深色" : "浅色")", size: 12, secondary: true)
+        status.accessibilityIdentifier = "settings.appearanceValue"
+        stack.addArrangedSubview(AppTheme.vertical([AppTheme.label("深色模式", size: 17, weight: .bold), picker, status], spacing: 12))
     }
     private func addStylePicker() {
         let title = AppTheme.label("界面风格", size: 17, weight: .bold)

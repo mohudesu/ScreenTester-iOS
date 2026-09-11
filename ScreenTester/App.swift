@@ -12,6 +12,7 @@ final class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let scene = scene as? UIWindowScene else { return }
         let window = UIWindow(windowScene: scene)
+        window.overrideUserInterfaceStyle = Preferences.shared.colorScheme.userInterfaceStyle
         window.rootViewController = UINavigationController(rootViewController: HomeController())
         window.makeKeyAndVisible()
         self.window = window
@@ -32,6 +33,10 @@ enum TestKind: Int, CaseIterable {
 final class Preferences {
     static let shared = Preferences()
     private let defaults = UserDefaults.standard
+    var colorScheme: AppColorScheme {
+        get { AppColorScheme(rawValue: defaults.string(forKey: "colorScheme") ?? "") ?? .system }
+        set { defaults.set(newValue.rawValue, forKey: "colorScheme") }
+    }
     var interfaceStyle: InterfaceStyle {
         get { InterfaceStyle(rawValue: defaults.string(forKey: "interfaceStyle") ?? "") ?? .neumorphic }
         set { defaults.set(newValue.rawValue, forKey: "interfaceStyle") }

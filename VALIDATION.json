@@ -1,7 +1,7 @@
 {
-  "checked_at": "2026-09-09T10:52:03.682997+00:00",
-  "app_version": "0.3.0",
-  "app_build": "4",
+  "checked_at": "2026-09-11T09:42:31.062306+00:00",
+  "app_version": "0.3.1",
+  "app_build": "5",
   "report_scope": "Offline source checks; see CLOUD-BUILD.json for native build results",
   "project_object_references": "PASS",
   "source_paths_and_compile_phases": "PASS",
@@ -11,17 +11,18 @@
   "app_icon": "PASS: 1024 x 1024, 8-bit RGB PNG",
   "app_icon_sha256": "a95f531f4cfa57c9756cc00e7f56ad46f89c796ce93fae00d3881d75589e730f",
   "bash_syntax": "PASS",
-  "swift_syntax": "PASS: grammar parsed for 6 Swift files; not SDK type checking",
+  "swift_syntax": "PASS: grammar parsed for 7 Swift files; not SDK type checking",
   "swift_compilation": "NOT RUN: requires macOS/Xcode",
   "native_simulator_execution": "NOT RUN: requires macOS/Xcode",
   "iphone_device_validation": "NOT RUN",
   "ipa_generated": false,
   "source_sha256": {
-    "ScreenTester/App.swift": "900dd5800cfa2e035207c50b5e8b5873d586883c121f113a2d3a97ca6e4be768",
-    "ScreenTester/Appearance.swift": "9d60437ad3dd89959491152e609cf706e41a4ae3671d24364efd817225beb74c",
-    "ScreenTester/Interface.swift": "17e0137e7589d6a61e4c63fc8ab282764ce3444ba4eeca6a7b80986c02a7f6f9",
+    "ScreenTester/App.swift": "bedae8c6595437b4907c907cbc4659a457bf51956e9b337818a9bd353ca10f10",
+    "ScreenTester/Appearance.swift": "60bbba94038023d40ade356235e361d1df1d25aca71f55b05602d3b30a130a78",
+    "ScreenTester/DeviceModel.swift": "8e73643e46b84d6186d2142c38b8de47200c0cd2b09917504e42317ad7b919dc",
+    "ScreenTester/Interface.swift": "66346c131c0985870bfbfe8e6901821887a2a2fcfd2a647098d699d9a5d33178",
     "ScreenTester/TestCanvas.swift": "de18208e592760ce072d4ee6513ddd49de7bdfc1edcba336500c54640484a8d2",
-    "ScreenTester/TestController.swift": "7fabb627fd7189f8e8b8cd063a065124980b890fc9188b3bed6e0bf47a22a126",
-    "UITests/InterfaceTests.swift": "df78b4c3b9b30fd4ac89c250bf54d430ccda366266ead9326a1c724904682807"
+    "ScreenTester/TestController.swift": "acc6b4af89b750765d8fd1405dd08024a05b63eac68c1b8ebff0268c3a6602f5",
+    "UITests/InterfaceTests.swift": "bdb6caf580e26df5a1c39ec159eed93bba66397092f102cade12e6a579a79a2d"
   }
 }

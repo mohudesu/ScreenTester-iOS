@@ -37,11 +37,37 @@ final class InterfaceTests: XCTestCase {
         let border = app.buttons["test.border"]
         XCTAssertTrue(border.waitForExistence(timeout: 5))
         border.tap()
+        XCTAssertTrue(app.staticTexts["test.border.deviceTitle"].waitForExistence(timeout: 5))
+        XCTAssertTrue(app.staticTexts["test.border.deviceTitle"].label.hasSuffix(" 黑边测试"))
         XCTAssertFalse(app.buttons["home.settings"].isHittable)
         capture("03-Fullscreen", app: app)
         app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).press(forDuration: 2.3)
         XCTAssertTrue(app.buttons["home.settings"].waitForExistence(timeout: 5))
         XCTAssertTrue(app.buttons["home.settings"].isHittable)
+    }
+    func testManualDarkModePersistsAcrossLaunchAndStyles() throws {
+        let app = XCUIApplication()
+        app.launch()
+        XCTAssertTrue(app.buttons["home.settings"].waitForExistence(timeout: 15))
+        app.buttons["home.settings"].tap()
+        for style in ["neumorphic", "liquidGlass"] {
+            app.buttons["settings.style.\(style)"].tap()
+            let picker = app.segmentedControls["settings.appearance"]
+            reveal(picker, in: app)
+            picker.buttons["深色"].tap()
+            XCTAssertEqual(app.staticTexts["settings.appearanceValue"].label, "当前外观：深色")
+            capture("Manual-Dark-\(style)", app: app)
+            app.terminate()
+            app.launch()
+            XCTAssertTrue(app.buttons["home.settings"].waitForExistence(timeout: 15))
+            app.buttons["home.settings"].tap()
+            XCTAssertTrue(app.segmentedControls["settings.appearance"].buttons["深色"].isSelected)
+            XCTAssertEqual(app.staticTexts["settings.appearanceValue"].label, "当前外观：深色")
+        }
+        app.segmentedControls["settings.appearance"].buttons["浅色"].tap()
+        XCTAssertEqual(app.staticTexts["settings.appearanceValue"].label, "当前外观：浅色")
+        app.segmentedControls["settings.appearance"].buttons["跟随系统"].tap()
+        XCTAssertTrue(app.segmentedControls["settings.appearance"].buttons["跟随系统"].isSelected)
     }
     func testStyleSwitchPersistsAndPreservesTestSettings() throws {
         let app = XCUIApplication()

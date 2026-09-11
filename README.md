@@ -18,3 +18,9 @@ Windows 可直接用浏览器打开 `Preview/index.html` 比较界面；网页�
 **[下载 v0.3.0 未签名 IPA](https://github.com/mohudesu/ScreenTester-iOS/releases/download/v0.3.0/ScreenTester-iPhone17-unsigned.ipa)** · [Release 与校验文件](https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.0)
 
 已通过 Xcode ARM64 设备编译、iPhone 17 模拟器两项界面测试和 IPA 完整性校验。软件包需要自行签名后安装；实机验证尚未进行。具体版本、构建提交和校验值见 `CLOUD-BUILD.json`。
+
+## v0.3.1 更新
+
+设置新增「深色模式」：跟随系统 / 浅色 / 深色，两种界面风格均支持，重启后保留。黑边测试中心常驻显示当前设备型号，首页入口同步显示。未知硬件标识不会猜测为其他机型。
+
+本次构建结果见 CLOUD-BUILD.json；上方 v0.3.0 下载链接是旧版，不包含此次修改。

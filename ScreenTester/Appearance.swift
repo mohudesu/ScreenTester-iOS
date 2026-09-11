@@ -1,5 +1,21 @@
 import UIKit
 
+enum AppColorScheme: String, CaseIterable {
+    case system, light, dark
+    var title: String {
+        switch self { case .system: return "跟随系统"; case .light: return "浅色"; case .dark: return "深色" }
+    }
+    var userInterfaceStyle: UIUserInterfaceStyle {
+        switch self { case .system: return .unspecified; case .light: return .light; case .dark: return .dark }
+    }
+    static func apply(_ option: AppColorScheme) {
+        Preferences.shared.colorScheme = option
+        for scene in UIApplication.shared.connectedScenes.compactMap({ $0 as? UIWindowScene }) {
+            for window in scene.windows { window.overrideUserInterfaceStyle = option.userInterfaceStyle }
+        }
+    }
+}
+
 enum InterfaceStyle: String, CaseIterable {
     case neumorphic
     case liquidGlass
@@ -230,7 +246,7 @@ class StyledPageController: UIViewController {
             stack.bottomAnchor.constraint(equalTo: scroll.contentLayoutGuide.bottomAnchor, constant: -44),
             stack.widthAnchor.constraint(equalTo: scroll.frameLayoutGuide.widthAnchor, constant: -52)
         ])
-        registerForTraitChanges([UITraitPreferredContentSizeCategory.self], action: #selector(refreshAppearance))
+        registerForTraitChanges([UITraitPreferredContentSizeCategory.self, UITraitUserInterfaceStyle.self], action: #selector(refreshAppearance))
         for name in [UIAccessibility.reduceTransparencyStatusDidChangeNotification, UIAccessibility.darkerSystemColorsStatusDidChangeNotification] {
             NotificationCenter.default.addObserver(self, selector: #selector(refreshAppearance), name: name, object: nil)
         }
