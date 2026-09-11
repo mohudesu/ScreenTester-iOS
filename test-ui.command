@@ -24,10 +24,21 @@ if [[ -d "$result_bundle" ]]; then
   xcrun xcresulttool export attachments --path "$result_bundle" --output-path "$screenshots"
 fi
 if [[ "$test_status" != 0 ]]; then exit "$test_status"; fi
-xcrun simctl terminate "$device_id" com.local.screentester || true
+# Capture dark mode through XCTest so the screenshot waits for the real home UI.
+# A fixed delay after simctl launch can capture only the launch screen on a busy runner.
 xcrun simctl ui "$device_id" appearance dark
-xcrun simctl launch "$device_id" com.local.screentester
-sleep 2
-xcrun simctl io "$device_id" screenshot "$screenshots/04-Home-dark.png"
+trap 'xcrun simctl ui "$device_id" appearance light' EXIT
+dark_bundle="$PWD/output/InterfaceTests-Dark-$stamp.xcresult"
+dark_status=0
+xcodebuild -project ScreenTester.xcodeproj -scheme ScreenTester -configuration Debug \
+  -destination "platform=iOS Simulator,id=$device_id" -parallel-testing-enabled NO \
+  -derivedDataPath output/UITestBuild -resultBundlePath "$dark_bundle" \
+  -only-testing:ScreenTesterUITests/InterfaceTests/testHomeSettingsAndFullscreenReturn \
+  CODE_SIGNING_ALLOWED=NO test-without-building 2>&1 | tee "output/ui-dark-$stamp.log" || dark_status=$?
+if [[ -d "$dark_bundle" ]]; then
+  xcrun xcresulttool export attachments --path "$dark_bundle" --output-path "$screenshots/dark"
+fi
+if [[ "$dark_status" != 0 ]]; then exit "$dark_status"; fi
 xcrun simctl ui "$device_id" appearance light
+trap - EXIT
 echo "UI tests passed. Screenshots: $screenshots"
