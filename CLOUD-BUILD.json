@@ -1,7 +1,32 @@
 {
   "app_version": "0.3.1",
   "app_build": "5",
-  "github_actions_execution": "PENDING",
-  "ipa_generated": false,
-  "previous_release_report": "CLOUD-BUILD-v0.3.0.json"
+  "download_sha256": "PASS",
+  "ipa_container_crc": "PASS",
+  "macho_platform": "iOS device",
+  "macho_architecture": "arm64",
+  "encrypted": false,
+  "embedded_provisioning_profile": false,
+  "code_signature_directory": false,
+  "app_icon_name": "AppIcon",
+  "compiled_icon_files": [
+    "Payload/ScreenTester.app/AppIcon60x60@2x.png",
+    "Payload/ScreenTester.app/AppIcon76x76@2x~ipad.png"
+  ],
+  "ipa_generated": true,
+  "ipa_file": "ScreenTester-iPhone17-v0.3.1-unsigned.ipa",
+  "ipa_bytes": 1919046,
+  "ipa_sha256": "7d4ad3ac57f4000e789b7ed82d6c29f3473019d06cc5736cdf8d4f9c1627c1d9",
+  "bundle_identifier": "com.local.screentester",
+  "minimum_ios": "17.0",
+  "source_commit": "dc0957bfa8344a17992d4fadd47c1d8893000c10",
+  "run_url": "https://github.com/mohudesu/ScreenTester-iOS/actions/runs/34665634349",
+  "github_actions_execution": "PASS",
+  "native_simulator_execution": "PASS: 3 UI tests and 1 additional dark-mode regression; 0 failures",
+  "visual_review": "PASS: manual dark appearance and nonoverlapping device title with border details",
+  "iphone_device_validation": "NOT RUN",
+  "release_status": "PASS",
+  "previous_release_report": "CLOUD-BUILD-v0.3.0.json",
+  "release_url": "https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.1",
+  "release_run_url": "https://github.com/mohudesu/ScreenTester-iOS/actions/runs/34679046845"
 }

@@ -1,8 +1,8 @@
-# ScreenTester iOS v0.3.0 · 动漫头像与双风格版
+# ScreenTester iOS v0.3.1 · 动漫头像与双风格版
 
-本次更新应用的桌面图标，并将双风格界面一起发布到 GitHub。新版 IPA 已由云端 macOS/Xcode 构建，下载到工程文件夹的上一级目录：`ScreenTester-iPhone17-v0.3.0-unsigned.ipa`（1,912,690 字节）。构建状态及文件校验记录见 `CLOUD-BUILD.json`。
+本次更新应用的桌面图标，并将双风格界面一起发布到 GitHub。新版 IPA 已由云端 macOS/Xcode 构建，下载到工程文件夹的上一级目录：`ScreenTester-iPhone17-v0.3.1-unsigned.ipa`（1,919,046 字节）。构建状态及文件校验记录见 `CLOUD-BUILD.json`。
 
-[GitHub v0.3.0 Release](https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.0) 提供相同软件包。已通过 ARM64 设备编译、两项 iPhone 17 模拟器界面测试和下载后校验；自签与实机验证由使用者完成。
+[GitHub v0.3.1 Release](https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.1) 提供相同软件包。已通过 ARM64 设备编译、三项 iPhone 17 模拟器界面测试和下载后校验；自签与实机验证由使用者完成。
 
 桌面图标使用银蓝发、蓝绿眼睛的动漫小人头像；资源为 1024 × 1024 不透明 RGB PNG，iOS 自动裁切圆角。图标和生成提示词保存在项目中，重新生成 Xcode 工程会保留图标。
 
@@ -39,7 +39,7 @@ bash build-ipa.command
 
 在 Mac 运行脚本时，IPA 输出到 `output/ScreenTester-unsigned-时间戳.ipa`，由你自行签名。`VALIDATION.json` 记录离线源码检查；`CLOUD-BUILD.json` 单独记录云端 Xcode 构建和原生模拟器测试结果。实机验证需要自签安装后完成。
 
-项目中的 `.github/workflows` 已配置 v0.3.0 的编译、界面测试与 Release 发布。仅运行本地脚本不会上传。
+项目中的 `.github/workflows` 已配置 v0.3.1 的编译、界面测试与 Release 发布。仅运行本地脚本不会上传。
 
 ## 实现位置
 
@@ -49,3 +49,5 @@ bash build-ipa.command
 - `UITests/InterfaceTests.swift`：原生界面回归测试。
 
 API 参考：[Apple UIGlassEffect](https://developer.apple.com/documentation/uikit/uiglasseffect)、[Apple Liquid Glass 接入指南](https://developer.apple.com/documentation/technologyoverviews/adopting-liquid-glass)。
+
+当前版本新增：设置 → 深色模式 → 跟随系统 / 浅色 / 深色；选择跨重启保存。黑边页面和首页入口显示当前设备型号，标题与说明分行排列。未知机型显示硬件标识，详见 DEVICE-MODELS.md。

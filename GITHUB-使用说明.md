@@ -1,10 +1,10 @@
 # 在 Windows 上通过 GitHub 生成未签名 IPA
 
-> **v0.3.0** 包含动漫头像图标、Liquid Glass / 新拟态切换。构建状态见 [Actions](https://github.com/mohudesu/ScreenTester-iOS/actions)，本次验证记录见 [CLOUD-BUILD.json](CLOUD-BUILD.json)。
+> **v0.3.1** 包含动漫头像图标、Liquid Glass / 新拟态切换。构建状态见 [Actions](https://github.com/mohudesu/ScreenTester-iOS/actions)，本次验证记录见 [CLOUD-BUILD.json](CLOUD-BUILD.json)。
 
 你只需要浏览器和 GitHub 账号。实际编译由 GitHub 的 macOS 机器运行，不需要本地 Mac、Xcode、Apple 账号、证书或开发者会员。生成的 IPA 由你自行签名。
 
-**[v0.3.0 Release](https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.0) 已发布**，提供 `ScreenTester-iPhone17-unsigned.ipa` 和 SHA-256 校验文件。安装前自行签名。
+**[v0.3.1 Release](https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.1) 已发布**，提供 `ScreenTester-iPhone17-unsigned.ipa` 和 SHA-256 校验文件。安装前自行签名。
 
 当前仓库已经配置好。需要重新编译时，可直接跳到第 3 步；第 1、2 步供迁移到新仓库时参考。
 
@@ -53,7 +53,7 @@ verify-on-mac.command
 
 构建产物设置为保留 7 天（这是 GitHub 下载文件的保留期限，不是签名有效期）。可在过期后重新运行构建。
 
-Release 附件不受 Artifacts 的 7 天期限影响。界面截图在 **ScreenTester-interface-previews**。发布流程会在 main 分支构建成功后创建 v0.3.0 Release；如果版本已存在，就保留已发布文件。重新编译的结果请从对应运行的 Artifacts 下载。发布后续版本时，需要同时更新应用版本和 `.github/workflows/release-ios.yml` 中的版本标签与说明。
+Release 附件不受 Artifacts 的 7 天期限影响。界面截图在 **ScreenTester-interface-previews**。发布流程会在 main 分支构建成功后创建 v0.3.1 Release；如果版本已存在，就保留已发布文件。重新编译的结果请从对应运行的 Artifacts 下载。发布后续版本时，需要同时更新应用版本和 `.github/workflows/release-ios.yml` 中的版本标签与说明。
 
 ## 编译失败怎么办
 
@@ -67,3 +67,5 @@ Release 附件不受 Artifacts 的 7 天期限影响。界面截图在 **ScreenT
 
 - https://docs.github.com/en/actions/how-tos/manage-workflow-runs/manually-run-a-workflow
 - https://docs.github.com/en/actions/reference/runners/github-hosted-runners
+
+当前版本新增：设置 → 深色模式 → 跟随系统 / 浅色 / 深色；选择跨重启保存。黑边页面和首页入口显示当前设备型号，标题与说明分行排列。未知机型显示硬件标识，详见 DEVICE-MODELS.md。

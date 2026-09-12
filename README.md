@@ -7,7 +7,7 @@
 
 <img src="ScreenTester/Assets.xcassets/AppIcon.appiconset/AppIcon.png" width="144" alt="ScreenTester 动漫头像图标">
 
-**v0.3.0：全新动漫头像图标，以及新拟态 / Liquid Glass 双风格界面。**
+**v0.3.1：全新动漫头像图标，以及新拟态 / Liquid Glass 双风格界面。**
 
 新增 Liquid Glass 风格，可在「首页右上角设置 → 界面风格」切换新拟态 / Liquid Glass。选择立即应用并保存在本机，检测参数保持不变。支持浅色/深色、大字、减少动态效果及减少透明度；首次启动沿用新拟态。
 
@@ -15,12 +15,9 @@
 
 Windows 可直接用浏览器打开 `Preview/index.html` 比较界面；网页预览不是 iOS 运行结果。原生玻璃材质需 Xcode 26 / iOS 26，较旧系统使用磨砂兼容效果。在 Mac 工程目录运行 `bash test-ui.command` 验证界面，运行 `bash build-ipa.command` 生成未签名 IPA。
 
-**[下载 v0.3.0 未签名 IPA](https://github.com/mohudesu/ScreenTester-iOS/releases/download/v0.3.0/ScreenTester-iPhone17-unsigned.ipa)** · [Release 与校验文件](https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.0)
+**[下载 v0.3.1 未签名 IPA](https://github.com/mohudesu/ScreenTester-iOS/releases/download/v0.3.1/ScreenTester-iPhone17-unsigned.ipa)** · [Release 与校验文件](https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.1)
 
-已通过 Xcode ARM64 设备编译、iPhone 17 模拟器两项界面测试和 IPA 完整性校验。软件包需要自行签名后安装；实机验证尚未进行。具体版本、构建提交和校验值见 `CLOUD-BUILD.json`。
+已通过 Xcode ARM64 设备编译、iPhone 17 模拟器三项界面测试和 IPA 完整性校验。软件包需要自行签名后安装；实机验证尚未进行。具体版本、构建提交和校验值见 `CLOUD-BUILD.json`。
 
-## v0.3.1 更新
 
-设置新增「深色模式」：跟随系统 / 浅色 / 深色，两种界面风格均支持，重启后保留。黑边测试中心常驻显示当前设备型号，首页入口同步显示。未知硬件标识不会猜测为其他机型。
-
-本次构建结果见 CLOUD-BUILD.json；上方 v0.3.0 下载链接是旧版，不包含此次修改。
+当前版本新增：设置 → 深色模式 → 跟随系统 / 浅色 / 深色；选择跨重启保存。黑边页面和首页入口显示当前设备型号，标题与说明分行排列。未知机型显示硬件标识，详见 DEVICE-MODELS.md。

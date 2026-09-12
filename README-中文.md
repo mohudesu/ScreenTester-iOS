@@ -1,16 +1,16 @@
 # ScreenTester iOS
 
-> **v0.3.0** 新增动漫人物头像图标与 Liquid Glass / 新拟态切换。详见 [交付说明](LOCAL-交付说明.md) 和 [构建记录](CLOUD-BUILD.json)。
+> **v0.3.1** 新增动漫人物头像图标与 Liquid Glass / 新拟态切换。详见 [交付说明](LOCAL-交付说明.md) 和 [构建记录](CLOUD-BUILD.json)。
 
 维护者：mohudesu。
 
 目标：iPhone 17 使用的未签名 IPA，由用户自行签名。Swift/UIKit 原生实现，最低 iOS 17.0，竖屏，无第三方依赖。
 
-**v0.3.0 已发布：[下载 IPA](https://github.com/mohudesu/ScreenTester-iOS/releases/download/v0.3.0/ScreenTester-iPhone17-unsigned.ipa)。** 已通过 GitHub Actions 的 Xcode ARM64 设备编译、iPhone 17 模拟器两项界面测试及安装包完整性校验。[Release 页面](https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.0) 提供 SHA-256 校验文件；安装前自行签名。实机验证尚未进行。
+**v0.3.1 已发布：[下载 IPA](https://github.com/mohudesu/ScreenTester-iOS/releases/download/v0.3.1/ScreenTester-iPhone17-unsigned.ipa)。** 已通过 GitHub Actions 的 Xcode ARM64 设备编译、iPhone 17 模拟器三项界面测试及安装包完整性校验。[Release 页面](https://github.com/mohudesu/ScreenTester-iOS/releases/tag/v0.3.1) 提供 SHA-256 校验文件；安装前自行签名。实机验证尚未进行。
 
 首页与设置页采用新拟态风格，支持浅色/深色主题、动态字体及按压反馈。首页按边缘与校准、色彩与显示、触控与响应分组。
 
-v0.3.0 增加 Liquid Glass 风格，在设置的「界面风格」中立即切换并自动保存。使用 Xcode 26 和 iOS 26 时，主要入口使用系统玻璃材质；旧系统使用磨砂兼容效果。开启「减少透明度」时使用不透明卡片。全屏测试画面保持原有绘制方式。
+v0.3.1 增加 Liquid Glass 风格，在设置的「界面风格」中立即切换并自动保存。使用 Xcode 26 和 iOS 26 时，主要入口使用系统玻璃材质；旧系统使用磨砂兼容效果。开启「减少透明度」时使用不透明卡片。全屏测试画面保持原有绘制方式。
 
 ## 只有 Windows：使用 GitHub 云端编译
 
@@ -60,3 +60,5 @@ iPhone 17 官方像素密度为 460 ppi，1 px 换算约 0.0552 mm，这只是�
 官方规格：https://www.apple.com.cn/iphone-17/specs/
 
 所有触控统计留在内存中，设置保存在本机；不请求网络、相机、麦克风或照片权限。
+
+当前版本新增：设置 → 深色模式 → 跟随系统 / 浅色 / 深色；选择跨重启保存。黑边页面和首页入口显示当前设备型号，标题与说明分行排列。未知机型显示硬件标识，详见 DEVICE-MODELS.md。
