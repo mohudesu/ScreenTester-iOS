@@ -1,0 +1,76 @@
+name: Publish verified v0.3.1
+
+on:
+  push:
+    branches: [main]
+    paths: ['.github/workflows/publish-v031.yml']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+      GH_REPO: ${{ github.repository }}
+      BUILD_RUN_ID: '34665634349'
+      RELEASE_SHA: ${{ github.sha }}
+      SOURCE_SHA: 'dc0957bfa8344a17992d4fadd47c1d8893000c10'
+    steps:
+      - name: Check this build still matches current app sources
+        id: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          built="$(gh api "repos/$GH_REPO/git/trees/$SOURCE_SHA" --jq '[.tree[] | select(.path == "ScreenTester" or .path == "ScreenTester.xcodeproj") | {path, sha}] | sort_by(.path)')"
+          current="$(gh api "repos/$GH_REPO/git/trees/main" --jq '[.tree[] | select(.path == "ScreenTester" or .path == "ScreenTester.xcodeproj") | {path, sha}] | sort_by(.path)')"
+          if [[ "$built" == "$current" ]]; then
+            echo 'current=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'App sources changed while this build ran; wait for the newer build.'
+            echo 'current=false' >> "$GITHUB_OUTPUT"
+          fi
+      - name: Download and verify IPA
+        if: steps.source.outputs.current == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh run download "$BUILD_RUN_ID" --name ScreenTester-unsigned-IPA --dir package
+          cd package
+          sha256sum -c *.ipa.sha256
+          ipa_files=(*.ipa)
+          test "${#ipa_files[@]}" -eq 1
+          mv "${ipa_files[0]}" ScreenTester-iPhone17-unsigned.ipa
+          unzip -t ScreenTester-iPhone17-unsigned.ipa
+          sha256sum ScreenTester-iPhone17-unsigned.ipa > ScreenTester-iPhone17-unsigned.ipa.sha256
+
+      - name: Publish v0.3.1
+        if: steps.source.outputs.current == 'true'
+        shell: bash
+        run: |
+          set -euo pipefail
+          cat > release-notes.md <<'NOTES'
+          ScreenTester iOS，由 mohudesu 维护的原生 Swift/UIKit 屏幕测试工具。面向 iPhone 17，最低 iOS 17.0。
+
+          **下载 ScreenTester-iPhone17-unsigned.ipa，自行签名后安装。**
+
+          新增手动外观选择：跟随系统、浅色、深色，重启后保留。黑边测试中心常驻显示当前设备型号，首页入口同步显示。保留动漫人物头像 App 图标。新增 Liquid Glass 界面，可在设置中与新拟态切换，选择立即生效并自动保存，检测参数独立保留。支持浅色/深色主题、动态字体、减少透明度及减少动态效果。iOS 26 的主要入口使用系统玻璃材质，较旧系统使用磨砂兼容效果。
+
+          提供黑边描边、像素分区、手动圆角校准、纯色、灰阶、白平衡、彩条、触控网格、多指触控和触控事件频率统计。HDR 页面仅提供系统 EDR 能力信息。
+
+          已通过模拟器的两种风格切换、设置跨重启保存、首页跳转、全屏测试退出检查，以及 ARM64 设备编译和 IPA 完整性校验；尚未在 iPhone 实机验证。圆角需手动校准，毫米值是理论换算，触控事件频率不等于硬件采样率。
+          NOTES
+          printf '\nIPA source commit: %s\n' "$SOURCE_SHA" >> release-notes.md
+          if gh release view v0.3.1 >/dev/null 2>&1; then
+            echo 'v0.3.1 already exists; keeping published files unchanged.'
+            exit 0
+          fi
+          gh release create v0.3.1 --target "$RELEASE_SHA" \
+            --title 'ScreenTester iOS v0.3.1 · 深色模式与机型标题（未签名）' \
+            --notes-file release-notes.md \
+            package/ScreenTester-iPhone17-unsigned.ipa \
+            package/ScreenTester-iPhone17-unsigned.ipa.sha256
