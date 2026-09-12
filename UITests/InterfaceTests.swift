@@ -109,7 +109,9 @@ final class InterfaceTests: XCTestCase {
             XCTAssertEqual(app.buttons["home.settings"].value as? String, style == "liquidGlass" ? "Liquid Glass" : "新拟态")
             capture("Style-\(index)-Home", app: app)
             app.buttons["test.border"].tap()
-            XCTAssertFalse(app.buttons["home.settings"].isHittable)
+            XCTAssertTrue(app.staticTexts["test.border.deviceTitle"].waitForExistence(timeout: 10))
+            let homeHidden = XCTNSPredicateExpectation(predicate: NSPredicate(format: "hittable == false"), object: app.buttons["home.settings"])
+            XCTAssertEqual(XCTWaiter.wait(for: [homeHidden], timeout: 5), .completed)
             app.coordinate(withNormalizedOffset: CGVector(dx: 0.5, dy: 0.5)).press(forDuration: 2.3)
             XCTAssertTrue(app.buttons["home.settings"].waitForExistence(timeout: 5))
 
