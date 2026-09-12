@@ -76,10 +76,6 @@ final class TestCanvas: UIView {
         Preferences.shared.color.setStroke()
         path.lineWidth = width
         path.stroke()
-        if kind == .border {
-            caption("黑边遮挡测试", y: bounds.midY - 65, font: 26, color: Preferences.shared.color)
-            caption("描边 \(Int(Preferences.shared.width)) px\n圆角为手动校准值\n长按 2 秒退出", y: bounds.midY, font: 15)
-        }
     }
     private func drawPrecision(_ context: CGContext) {
         // Integer pixel-aligned filled rectangles avoid half-pixel stroke placement.

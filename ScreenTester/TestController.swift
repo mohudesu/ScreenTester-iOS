@@ -33,15 +33,26 @@ final class TestController: UIViewController, UIGestureRecognizerDelegate {
             modelTitle.accessibilityIdentifier = "test.border.deviceTitle"
             modelTitle.font = UIFontMetrics(forTextStyle: .headline).scaledFont(for: .systemFont(ofSize: 20, weight: .semibold))
             modelTitle.adjustsFontForContentSizeCategory = true
-            modelTitle.textColor = .white
+            modelTitle.textColor = Preferences.shared.color
             modelTitle.numberOfLines = 0
             modelTitle.textAlignment = .center
-            modelTitle.translatesAutoresizingMaskIntoConstraints = false
-            canvas.addSubview(modelTitle)
+            let details = UILabel()
+            details.text = "描边 \(Int(Preferences.shared.width)) px\n圆角为手动校准值\n长按 2 秒退出"
+            details.font = UIFontMetrics(forTextStyle: .body).scaledFont(for: .systemFont(ofSize: 15))
+            details.adjustsFontForContentSizeCategory = true
+            details.textColor = .white
+            details.numberOfLines = 0
+            details.textAlignment = .center
+            let information = UIStackView(arrangedSubviews: [modelTitle, details])
+            information.axis = .vertical
+            information.spacing = 20
+            information.isUserInteractionEnabled = false
+            information.translatesAutoresizingMaskIntoConstraints = false
+            canvas.addSubview(information)
             NSLayoutConstraint.activate([
-                modelTitle.centerXAnchor.constraint(equalTo: canvas.centerXAnchor),
-                modelTitle.centerYAnchor.constraint(equalTo: canvas.centerYAnchor),
-                modelTitle.widthAnchor.constraint(lessThanOrEqualTo: canvas.widthAnchor, constant: -64)
+                information.centerXAnchor.constraint(equalTo: canvas.centerXAnchor),
+                information.centerYAnchor.constraint(equalTo: canvas.centerYAnchor),
+                information.widthAnchor.constraint(equalTo: canvas.widthAnchor, constant: -64)
             ])
         }
         if !kind.isTouch {
