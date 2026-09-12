@@ -20,7 +20,21 @@ jobs:
       BUILD_RUN_ID: ${{ github.event.workflow_run.id }}
       SOURCE_SHA: ${{ github.event.workflow_run.head_sha }}
     steps:
+      - name: Check this build still matches current app sources
+        id: source
+        shell: bash
+        run: |
+          set -euo pipefail
+          built="$(gh api "repos/$GH_REPO/git/trees/$SOURCE_SHA" --jq '[.tree[] | select(.path == "ScreenTester" or .path == "ScreenTester.xcodeproj") | {path, sha}] | sort_by(.path)')"
+          current="$(gh api "repos/$GH_REPO/git/trees/main" --jq '[.tree[] | select(.path == "ScreenTester" or .path == "ScreenTester.xcodeproj") | {path, sha}] | sort_by(.path)')"
+          if [[ "$built" == "$current" ]]; then
+            echo 'current=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'App sources changed while this build ran; wait for the newer build.'
+            echo 'current=false' >> "$GITHUB_OUTPUT"
+          fi
       - name: Download and verify IPA
+        if: steps.source.outputs.current == 'true'
         shell: bash
         run: |
           set -euo pipefail
@@ -34,6 +48,7 @@ jobs:
           sha256sum ScreenTester-iPhone17-unsigned.ipa > ScreenTester-iPhone17-unsigned.ipa.sha256
 
       - name: Publish v0.3.1
+        if: steps.source.outputs.current == 'true'
         shell: bash
         run: |
           set -euo pipefail
